@@ -1,0 +1,8 @@
+key = "fal-cdn"
+capability = "asset_store"
+name = "fal CDN"
+
+[dependencies]
+python = [
+    "fal-client>=0.14.1,<2",
+]

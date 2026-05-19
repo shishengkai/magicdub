@@ -1,0 +1,6 @@
+key = "fal-sam-audio"
+capability = "vocal_separation"
+name = "fal SAM Audio"
+
+[dependencies]
+python = []

@@ -1,0 +1,6 @@
+key = "fal-wizper"
+capability = "asr"
+name = "fal Wizper"
+
+[dependencies]
+python = []

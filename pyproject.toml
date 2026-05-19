@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "magicdub"
+version = "0.1.0"
+description = "AI video dubbing pipeline (CLI)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12.0,<1",
+    "pydantic>=2.0,<3",
+    "requests>=2.31.0,<3",
+    "python-dotenv>=1.0.0,<2",
+]
+
+[tool.setuptools]
+py-modules = ["magicdub"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = [
+    "cli*",
+    "pipeline*",
+    "media*",
+    "schemas*",
+    "providers*",
+    "config*",
+    "storage*",
+    "constants*",
+    "utils*",
+]
+
+[tool.setuptools.package-data]
+"*" = ["README.md", ".env.example", "provider.toml"]

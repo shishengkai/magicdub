@@ -1,0 +1,8 @@
+key = "bailian-fun-asr"
+capability = "asr"
+name = "Aliyun Bailian FunASR"
+
+[dependencies]
+python = [
+    "dashscope>=1.20.0,<2",
+]

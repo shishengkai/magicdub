@@ -1,0 +1,6 @@
+key = "fal-demucs"
+capability = "vocal_separation"
+name = "fal Demucs"
+
+[dependencies]
+python = []

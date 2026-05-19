@@ -1,0 +1,8 @@
+key = "fal-openrouter"
+capability = "llm"
+name = "fal OpenRouter"
+
+[dependencies]
+python = [
+    "openai>=1.40.0,<2",
+]

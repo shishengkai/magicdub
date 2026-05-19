@@ -1,0 +1,6 @@
+key = "fal-index-tts-2"
+capability = "tts"
+name = "fal Index TTS 2"
+
+[dependencies]
+python = []

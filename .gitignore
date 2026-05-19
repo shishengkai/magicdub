@@ -1,0 +1,23 @@
+test_by_step/
+Drafts/
+.DS_Store
+
+build/
+dist/
+*.egg-info/
+
+.tmp/
+.magicdub/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+*.log
+
+# 本地密钥（根目录与各 provider 私有 .env）
+.env
+providers/**/*.env
+!providers/**/*.env.example

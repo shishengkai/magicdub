@@ -1,0 +1,21 @@
+#!/bin/sh
+# Installed as .venv/bin/magicdub — works when repo path contains spaces (iCloud).
+BINDIR=$(cd "$(dirname "$0")" && pwd)
+if [ -f "$BINDIR/magicdub_run.py" ]; then
+  REPO=$(cd "$BINDIR/.." && pwd)
+else
+  REPO=$(cd "$BINDIR/../.." && pwd)
+fi
+export PYTHONPATH="$REPO${PYTHONPATH:+:$PYTHONPATH}"
+PYTHON="$BINDIR/python3.12"
+if [ ! -x "$PYTHON" ]; then
+  PYTHON="$REPO/.venv/bin/python3.12"
+fi
+if [ ! -x "$PYTHON" ]; then
+  PYTHON=$(command -v python3.12 || command -v python3)
+fi
+if [ -z "$PYTHON" ]; then
+  echo "magicdub: python3.12 or python3 not found" >&2
+  exit 127
+fi
+exec "$PYTHON" "$REPO/scripts/magicdub_run.py" "$@"

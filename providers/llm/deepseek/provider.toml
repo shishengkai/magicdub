@@ -1,0 +1,3 @@
+key = "deepseek"
+capability = "llm"
+name = "DeepSeek"

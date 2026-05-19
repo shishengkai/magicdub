@@ -1,0 +1,3 @@
+key = "google-gemini"
+capability = "llm"
+name = "Google Gemini"
