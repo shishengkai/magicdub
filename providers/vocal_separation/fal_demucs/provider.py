@@ -8,11 +8,15 @@ from typing import Any
 
 import requests
 
-from config.settings import fal_trace_headers, require_env
+from config.settings import require_env
 from urllib.parse import urlparse
 
 from media.resources import MediaRequirement, PreparedMedia, guess_mime_type
 from providers.vocal_separation.base import VocalSeparationRequest, VocalSeparationResult
+
+
+def _fal_trace_headers() -> dict[str, str]:
+    return {"x-my-trace-id": os.getenv("FAL_MY_TRACE_ID", "MagicDub").strip() or "MagicDub"}
 
 
 def _resolve_demucs_endpoint() -> str:
@@ -46,7 +50,7 @@ def _call_fal_queue(
     headers = {
         "Authorization": f"Key {fal_key}",
         "Content-Type": "application/json",
-        **fal_trace_headers(),
+        **_fal_trace_headers(),
     }
     submit = requests.post(
         f"https://queue.fal.run/{model_id}",
@@ -64,7 +68,7 @@ def _call_fal_queue(
 
     deadline = time.time() + max_wait_s
     last_status = None
-    auth_headers = {"Authorization": f"Key {fal_key}", **fal_trace_headers()}
+    auth_headers = {"Authorization": f"Key {fal_key}", **_fal_trace_headers()}
     while True:
         if time.time() > deadline:
             raise TimeoutError(

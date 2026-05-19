@@ -1,0 +1,10 @@
+---
+description: 修改环境变量时同步 .env 与 .env.example
+alwaysApply: true
+---
+
+# .env 与 .env.example 同步
+
+- 凡涉及环境变量、CLI 默认值或 provider 配置的改动，**同时更新** 项目根目录的 `.env` 与 `.env.example`，保持两者内容一致。
+- 用户明确不介意将配置写入仓库；不要仅以「避免泄露」为由只改 `.env.example` 而不同步 `.env`。
+- 新增变量时：两处都加；改值时：两处都改；删除时：两处都删。

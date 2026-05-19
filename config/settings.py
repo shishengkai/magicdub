@@ -21,9 +21,9 @@ def require_env(name: str) -> str:
     return v
 
 
-def fal_trace_headers() -> dict[str, str]:
-    tid = os.getenv("FAL_MY_TRACE_ID", "").strip() or "MagicDub"
-    return {"x-my-trace-id": tid}
+def default_target_lang() -> str | None:
+    raw = os.getenv("MAGICDUB_TARGET_LANG", "").strip()
+    return raw or None
 
 
 @lru_cache

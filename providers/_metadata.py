@@ -9,9 +9,6 @@ from typing import Any
 from config.settings import REPO_ROOT
 
 _PROVIDER_KEY_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
-_PROVIDER_KEY_ALIASES: dict[tuple[str, str], str] = {
-    ("asset_store", "fal-storage"): "fal-cdn",
-}
 
 
 @dataclass(frozen=True)
@@ -41,12 +38,7 @@ def provider_key_from_module_name(module_name: str) -> str:
     return module_name.replace("_", "-")
 
 
-def canonical_provider_key(capability: str, provider_key: str) -> str:
-    return _PROVIDER_KEY_ALIASES.get((capability, provider_key), provider_key)
-
-
 def provider_dir(capability: str, provider_key: str) -> Path:
-    provider_key = canonical_provider_key(capability, provider_key)
     return REPO_ROOT / "providers" / capability / provider_module_name(provider_key)
 
 
@@ -55,7 +47,7 @@ def parse_provider_ref(ref: str) -> tuple[str, str]:
     if len(parts) != 2 or not parts[0].strip() or not parts[1].strip():
         raise RuntimeError("Provider ref must look like capability/provider-key.")
     capability = parts[0].strip()
-    provider_key = canonical_provider_key(capability, parts[1].strip())
+    provider_key = parts[1].strip()
     provider_module_name(provider_key)
     return capability, provider_key
 
@@ -69,7 +61,6 @@ def _read_toml(path: Path) -> dict[str, Any]:
 
 
 def read_provider_manifest(capability: str, provider_key: str) -> ProviderManifest:
-    provider_key = canonical_provider_key(capability, provider_key)
     module_name = provider_module_name(provider_key)
     path = provider_dir(capability, provider_key)
     manifest_path = path / "provider.toml"

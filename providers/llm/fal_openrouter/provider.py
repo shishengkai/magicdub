@@ -6,13 +6,17 @@ from typing import Any
 
 from openai import OpenAI
 
-from config.settings import fal_trace_headers, require_env
+from config.settings import require_env
 from providers.llm._openrouter_attribution import openrouter_app_attribution_headers
 from providers.llm.base import LlmRequest, LlmResult
 
 DEFAULT_LLM_BASE_URL = "https://fal.run/openrouter/router/openai/v1"
 DEFAULT_LLM_MODEL = "google/gemini-3-flash-preview"
 DEFAULT_LLM_TIMEOUT_SECONDS = 1800
+
+
+def _fal_trace_headers() -> dict[str, str]:
+    return {"x-my-trace-id": os.getenv("FAL_MY_TRACE_ID", "MagicDub").strip() or "MagicDub"}
 
 
 def _env_first(*names: str) -> str:
@@ -70,7 +74,7 @@ def _openrouter_client_headers(base_url: str) -> dict[str, str]:
 def _fal_llm_trace_headers(base_url: str) -> dict[str, str]:
     if "fal.run" not in base_url:
         return {}
-    return fal_trace_headers()
+    return _fal_trace_headers()
 
 
 def _extra_body(base_url: str) -> dict[str, Any] | None:

@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 from config.settings import REPO_ROOT
 from providers._installer import provider_install_command
 from providers._metadata import (
-    canonical_provider_key,
     provider_dir,
     provider_module_name,
     read_provider_manifest,
@@ -40,7 +39,6 @@ def load_provider(capability: str, env_name: str, default_key: str) -> _T:
 
 
 def load_provider_by_key(capability: str, provider_key: str) -> _T:
-    provider_key = canonical_provider_key(capability, provider_key)
     module_name = provider_module_name(provider_key)
     load_provider_env(capability, module_name)
 
