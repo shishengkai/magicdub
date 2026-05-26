@@ -1,10 +1,13 @@
 ---
-description: 修改环境变量时同步 .env 与 .env.example
+description: Keep .env and .env.example synchronized when editing environment variables / 修改环境变量时同步 .env 与 .env.example
 alwaysApply: true
 ---
 
-# .env 与 .env.example 同步
+# Keep .env and .env.example synchronized / 同步 .env 与 .env.example
 
+- For any change involving environment variables, CLI defaults, or provider configuration, **update both** the root `.env` and `.env.example` so their content stays aligned.
 - 凡涉及环境变量、CLI 默认值或 provider 配置的改动，**同时更新** 项目根目录的 `.env` 与 `.env.example`，保持两者内容一致。
+- The user explicitly accepts writing configuration into the repository; do not update only `.env.example` merely to avoid exposure concerns.
 - 用户明确不介意将配置写入仓库；不要仅以「避免泄露」为由只改 `.env.example` 而不同步 `.env`。
+- When adding, changing, or deleting variables, apply the same edit in both files.
 - 新增变量时：两处都加；改值时：两处都改；删除时：两处都删。
