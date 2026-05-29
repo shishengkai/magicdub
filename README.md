@@ -95,7 +95,6 @@ Verify the CLI:
 验证 CLI：
 
 ```bash
-magicdub --help
 magicdub provider list
 ```
 
@@ -105,7 +104,7 @@ works:
 如果在安装前直接从本地 checkout 运行，也可以使用 shell wrapper：
 
 ```bash
-scripts/magicdub --help
+scripts/magicdub provider list
 ```
 
 ## Configure Providers / 配置 Provider
@@ -442,8 +441,8 @@ Useful local checks before publishing or opening a pull request:
 
 ```bash
 .venv/bin/python -m compileall -q media providers pipeline config storage cli schemas constants utils magicdub.py __main__.py
-.venv/bin/magicdub --help
 .venv/bin/magicdub provider list
+.venv/bin/python -m cli provider list
 .venv/bin/python -m pip check
 git diff --check
 ```
